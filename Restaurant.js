@@ -7,8 +7,8 @@ Restaurant.init({
     location: DataTypes.STRING,
     ratings: DataTypes.INTEGER
 }, {
-    sequelize
-    
+    sequelize,
+    timestamps: false
 });
 
 module.exports = { Restaurant };

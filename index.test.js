@@ -1,6 +1,8 @@
 const {sequelize} = require('./db');
 const {Restaurant, Menu, FoodItems} = require('./index');
 
+/*
+
 describe('Restaurant', () => {
 
     beforeAll(async () => {
@@ -67,3 +69,5 @@ describe('Restaurant', () => {
     })
 
 })
+
+*/

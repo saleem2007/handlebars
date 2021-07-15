@@ -1,7 +1,6 @@
 {
   "name": "sequelizepractice",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "jest"
@@ -9,8 +8,19 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "jest": "^27.0.6",
     "sequelize": "^6.6.5",
     "sqlite3": "^5.0.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/saleem2007/sequelize.git"
+  },
+  "bugs": {
+    "url": "https://github.com/saleem2007/sequelize/issues"
+  },
+  "homepage": "https://github.com/saleem2007/sequelize#readme",
+  "description": ""
 }
