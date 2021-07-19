@@ -1,0 +1,43 @@
+<div class="single-link">
+	<h2>Restaurant Name : {{restaurant.name}}</h2>
+    <img class="item" src="{{restaurant.image}}" />
+	<a class="btn" href="/restaurants">back to the restaurants list</a>
+</div>
+
+<div class="appetizer">
+
+    <h2>Appetizers : </h2>
+    <br>
+    {{#each restaurant.Menus}}
+        <h3>{{appetizer}}</h3>
+    {{/each}}
+
+</div>
+
+<div class="lunch">
+    <br>
+    <h2>Lunch :</h2>
+    <br>
+    {{#each restaurant.Menus}}
+        <h3>{{lunch}}</h3>
+    {{/each}}
+
+</div>
+
+<div class="dinner">
+    <br>
+    <h2>Dinner :</h2>
+    <br>
+    {{#each restaurant.Menus}}
+        <h3>{{dinner}}</h3>
+    {{/each}}
+</div>
+
+<div class="dessert">
+    <br>
+    <h2>Desserts :</h2>
+    <br>
+    {{#each restaurant.Menus}}
+        <h3>{{dessert}}</h3>
+    {{/each}}
+</div>

@@ -1,10 +1,27 @@
 const express = require('express');
+const Handlebars = require('handlebars');
+const expressHandlebars = require('express-handlebars');
+const {allowInsecurePrototypeAccess} = require('@handlebars/allow-prototype-access');
+
 const app = express();
 
 const { Restaurant, Menu, FoodItems } = require('./index');
 const { sequelize } = require('./db');
 
 const port = 8000;
+
+// serve static assets from public folder
+app.use(express.static('public'));
+
+//Configures handlebars library to work well w/ Express + Sequelize model
+const handlebars = expressHandlebars({
+    handlebars : allowInsecurePrototypeAccess(Handlebars)
+})
+
+//Tell this express app we're using handlebars
+app.engine('handlebars', handlebars);
+app.set('view engine', 'handlebars')
+
 
 app.use(express.json());
 
@@ -49,16 +66,16 @@ app.get('/', (req,res) => {
 // getting all restauarants with this function
 app.get('/restaurants', async (req, res) => {
 
-    let restaurant = await Restaurant.findAll();
-    res.json({ restaurant });
-
+    let restaurants = await Restaurant.findAll();
+    //res.json({ restaurant });
+    res.render('restaurants', { restaurants })// 2 args: string name of template, data to put in
 })
 // getting restaurant by id and it associated menus
 app.get('/restaurants/:id', async (req, res) => {
 
-    let restaurant = await Restaurant.findByPk(req.params.id, { include: Menu });
-    res.json({ restaurant });
-
+    let restaurant = await Restaurant.findByPk(req.params.id, {include: Menu});
+    //res.json({ restaurant });
+    res.render('restaurant', { restaurant });
 })
 // getting menu of all the restaurants
 app.get('/menu', async (req, res) => {
@@ -80,8 +97,8 @@ async function seed() {
 
     await sequelize.sync({force: true});
 
-    let oliveGarden = await Restaurant.create({name: 'Olive Garden', location: 'Grapevine', ratings: 4.1});
-    let ontheBorder = await Restaurant.create({name: 'On The Border', location: 'Bedford', ratings: 4.2});
+    let oliveGarden = await Restaurant.create({name: 'Olive Garden', image: '/img/olive-garden-logo.gif', location: 'Grapevine', ratings: 4.1});
+    let ontheBorder = await Restaurant.create({name: 'On The Border', image: '/img/giphy-preview.gif', location: 'Bedford', ratings: 4.2});
 
     let oliveMenu = await Menu.create({appetizer: 'Fried Mozzarella', lunch: 'Fettuccine Alfredo', dinner: 'Chicken Parmiginana', dessert: 'Chocolate Brownie Lasagna'});
     let oliveMenu2 = await Menu.create({appetizer: 'Lasagna Fritta', lunch: 'Cheese Ravioli', dinner: 'Tour of Italy', dessert: 'Black Tie Mousse Cake'});
